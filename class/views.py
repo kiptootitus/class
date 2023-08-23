@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from .models import Room
 # Create your views here.
 rooms = [
     {'id': 1, 'name': '101', 'floor': 1, 'beds': 2},
