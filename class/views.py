@@ -12,4 +12,16 @@ def home(request ):
     return render(request, 'class/home.html', context)
 
 def room(request, pk):
-    return render(request,'class/room.html')
+    # Find the room with the specified ID (pk)
+    room = None
+    for r in rooms:
+        if r['id'] == int(pk):
+            room = r
+            break
+    
+    if room is None:
+        # Handle case when room is not found
+        return render(request, 'class/room_not_found.html')
+    
+    context = {'room': room}
+    return render(request, 'room.html', context)
