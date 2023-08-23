@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study</title>
+   
+</head>
+ {% include 'navbar.html' %}
+<body>
+    <h1>Home Page</h1>
+    {%for room in rooms%}
+    <a href="room.php?id={{room.id}}">{{room.name}}</a><br>
+    {%endfor%}
+</body>
+</html>

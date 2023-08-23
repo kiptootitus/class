@@ -7,8 +7,9 @@ rooms = [
     {'id': 3, 'name': '301', 'floor': 3, 'beds': 3},
 ]
 
-def home(request):
-    return render(request, 'home.html', {'rooms': rooms})
+def home(request ):
+    context={'rooms':rooms}
+    return render(request, 'class/home.html', context)
 
-def room(request):
-    return render(request,'room.html')
+def room(request, pk):
+    return render(request,'class/room.html')
