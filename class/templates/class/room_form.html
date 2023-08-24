@@ -1,0 +1,10 @@
+{% comment %} {% extends 'main.html'%} {% endcomment %}
+{% include 'navbar.html'%}
+{% block content %}
+    <div>
+        <form action="" method="post">
+           {% csrf_token %}
+        <input type="submit" value="Subtmit" >
+        </form>
+
+{% endblock %}
