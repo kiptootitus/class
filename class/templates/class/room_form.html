@@ -1,10 +1,10 @@
-{% comment %} {% extends 'main.html'%} {% endcomment %}
 {% include 'navbar.html'%}
 {% block content %}
     <div>
-        <form action="" method="post">
+        <form  method="POST" action="">
            {% csrf_token %}
+           {{form.as_p}}
         <input type="submit" value="Subtmit" >
         </form>
-
+    </div>
 {% endblock %}
