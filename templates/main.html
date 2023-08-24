@@ -1,16 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Study</title>
-   
+    <!-- Add your CSS or other meta tags here -->
 </head>
- {% include 'navbar.html' %}
 <body>
+    {% include 'navbar.html' %}
     <h1>Home Page</h1>
-    {%for room in rooms%}
-    <a href="room.php?id={{room.id}}">{{room.name}}</a><br>
-    {%endfor%}
+    {% for room in rooms %}
+        <a href="{% url 'room' room.id %}">{{ room.name }}</a><br>
+    {% endfor %}
 </body>
 </html>

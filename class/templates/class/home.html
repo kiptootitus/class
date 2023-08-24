@@ -7,9 +7,15 @@
 </head>
  {% include 'navbar.html' %}
 <body>
-    <h1>Home Page</h1>
-    {%for room in rooms%}
-            <h5>{{room.id}}--{{room.name}}</h5>
-    {%endfor%}
+<div>
+    {% for room in rooms %}
+    
+    <div>
+        <span>{{room.host.username}}</span>
+        <h5>{{room.id}} --<a href="{% url 'room' room.id%}">{{room.name}}</a></h5>   
+
+    </div>
+    {% endfor %}
+</div>
 </body>
 </html>

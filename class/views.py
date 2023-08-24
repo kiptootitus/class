@@ -3,9 +3,9 @@ from .models import Room
  
 # Create your views here.
 rooms = [
-    {'id': 1, 'name': '101', 'floor': 1, 'beds': 2},
-    {'id': 2, 'name': '201', 'floor': 2, 'beds': 1},
-    {'id': 3, 'name': '301', 'floor': 3, 'beds': 3},
+    {'id': 1, 'name': 'East Wing', 'floor': 1, 'beds': 2},
+    {'id': 2, 'name': 'Southwest wing', 'floor': 2, 'beds': 1},
+    {'id': 3, 'name': 'North-Eastern Wing', 'floor': 3, 'beds': 3},
 ]
 
 def home(request ):
@@ -13,7 +13,7 @@ def home(request ):
     context={'rooms':rooms}
     return render(request, 'class/home.html', context)
 
-def room(request, pk):
+def room_view(request, pk):
     # Find the room with the specified ID (pk)
     room = None
     for r in rooms:
@@ -26,4 +26,4 @@ def room(request, pk):
         return render(request, 'class/room_not_found.html')
     
     context = {'room': room}
-    return render(request, 'room.html', context)
+    return render(request, 'class/room.html', context)
