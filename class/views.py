@@ -23,3 +23,14 @@ def createRoom(request):
             return redirect('/')
     context={'form':form}
     return render(request, 'class/room_form.html', context)
+
+def updateRoom(request,pk):
+    room=Room.objects.get(id=pk)
+    form=RoomForm(instance=room)
+    
+    context={'form':form}
+    return render(request, 'class/room_form.html', context)
+
+def deleteRoom(request):
+    pass
+    

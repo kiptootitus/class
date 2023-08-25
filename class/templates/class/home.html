@@ -3,22 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Study</title>
-   
-</head>
- {% include 'navbar.html' %}
-<body>
-    <a href='{%url 'create-room' %}'>Create Room</a>
+    {% include 'navbar.html' %}
 
-<div>
-    {% for room in rooms %}
+</head>
+<hr>
+
+ 
+<body>
+    <style>
+        
+    </style>
+    <div class="container">
+        
+    <a href='{%url 'create-room' %}'>Create Room</a>
     
     <div>
-        <span>@{{room.host.username}}</span>
-        <h5>{{room.id}} --<a href="{% url 'room' room.id%}">{{room.name}}</a></h5>   
-        <smaLL>{{room.topic.name}}</smaLL>
-        <hr>
+        {% for room in rooms %}
+        
+        <div>
+            <a href='{%url 'update-room' room.id %}'>Edit</a>
+            <span>@{{room.host.username}}</span>
+            <h5>{{room.id}} --<a href="{% url 'room' room.id%}">{{room.name}}</a></h5>   
+            <smaLL>{{room.topic.name}}</smaLL>
+            <hr>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+    <div>
+
 </body>
 </html>
