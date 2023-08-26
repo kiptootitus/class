@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .models import Room, Topic
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import RoomForm
@@ -13,9 +16,18 @@ def loginPage(request):
             user=User.objects.get(username=username)
         except:
             messages.error(request, 'Username does not exist')
-         
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            messages.error(request, 'Username or Password is incorrect')
+
     context={}
     return render(request, 'class/login.html', context)
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
 def home(request):
     q=request.GET.get('q') if request.GET.get('q') != None else ''
     
@@ -36,6 +48,7 @@ def room(request, pk):
     context = {'room': room}
     return render(request, 'class/room.html', context)
 
+@login_required(login_url='login')
 def createRoom(request):
     form=RoomForm()
     if request.method=='POST':
@@ -54,6 +67,8 @@ def updateRoom(request,pk):
         if form.is_valid():
             form.save()
             return redirect('/')
+    if request.user != room.host:
+        return HttpResponse('You are not allowed here') 
     context={'form':form}
     return render(request, 'class/room_form.html', context)
 
