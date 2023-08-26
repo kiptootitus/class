@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Room, Topic
 from django.db.models import Q
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -9,6 +10,7 @@ from django.contrib.auth.models import User
 from .forms import RoomForm
 
 def loginPage(request):
+    page = 'login'
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
@@ -28,6 +30,27 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+def registerPage(request):
+    form = UserCreationForm()
+    
+    if request.method=='POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user=form.save(commit=False)
+            user.username = user.username
+            user.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'An error occured during registration')
+        
+    return render('request', 'class/login.html', {'form':form})
+        
+    
+    
+    
 def home(request):
     q=request.GET.get('q') if request.GET.get('q') != None else ''
     
