@@ -46,7 +46,7 @@ def registerPage(request):
         else:
             messages.error(request, 'An error occured during registration')
         
-    return render('request', 'class/login.html', {'form':form})
+    return render(request, 'class/login.html', {'form':form})
         
     
     
